@@ -14,11 +14,13 @@ services:
       - "13306:13306"
     expose:
       - "13306"
+    network_mode: "host"
+
   isucari-go:
     container_name: isucari-go
     build: ./webapp/go/
     environment:
-      MYSQL_HOST: mysql
+      MYSQL_HOST: 127.0.0.1
       MYSQL_PORT: 13306
       MYSQL_USER: isucari
       MYSQL_DBNAME: isucari
@@ -31,6 +33,4 @@ services:
     working_dir: "/src/webapp/go"
     volumes:
       - "$PWD:/src"
-    links:
-      - "mysql"
-    tty: true
+    network_mode: "host"
