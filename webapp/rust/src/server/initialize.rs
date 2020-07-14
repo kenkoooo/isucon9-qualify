@@ -7,7 +7,7 @@ use sqlx::MySqlPool;
 use std::process::Command;
 
 #[post("/initialize")]
-pub async fn initialize(
+pub async fn post_initialize(
     request: web::Json<Value>,
     pool: web::Data<MySqlPool>,
 ) -> IsuResult<web::Json<Value>> {
