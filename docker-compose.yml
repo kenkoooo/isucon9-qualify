@@ -3,6 +3,10 @@ services:
   mysql:
     container_name: mysql-isucon
     image: mysql
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
     environment:
       MYSQL_DATABASE: isucari
       MYSQL_USER: isucari
@@ -19,6 +23,10 @@ services:
   isucari-go:
     container_name: isucari-go
     build: ./webapp/go/
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
     environment:
       MYSQL_HOST: 127.0.0.1
       MYSQL_PORT: 13306
