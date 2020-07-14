@@ -3,10 +3,6 @@ services:
   mysql:
     container_name: mysql-isucon
     image: mysql
-    deploy:
-      resources:
-        limits:
-          cpus: '1.0'
     environment:
       MYSQL_DATABASE: isucari
       MYSQL_USER: isucari
@@ -20,13 +16,28 @@ services:
       - "13306"
     network_mode: "host"
 
-  isucari-go:
-    container_name: isucari-go
-    build: ./webapp/go/
-    deploy:
-      resources:
-        limits:
-          cpus: '1.0'
+  # isucari-go:
+  #   container_name: isucari-go
+  #   build: ./webapp/go/
+  #   environment:
+  #     MYSQL_HOST: 127.0.0.1
+  #     MYSQL_PORT: 13306
+  #     MYSQL_USER: isucari
+  #     MYSQL_DBNAME: isucari
+  #     MYSQL_PASS: isucari
+  #   ports:
+  #     - "8000:8000"
+  #   expose:
+  #     - "8000"
+  #   command: "/app/isucari"
+  #   working_dir: "/src/webapp/go"
+  #   volumes:
+  #     - "$PWD:/src"
+  #   network_mode: "host"
+
+  isucari-rust:
+    container_name: isucari-rust
+    build: ./webapp/rust/
     environment:
       MYSQL_HOST: 127.0.0.1
       MYSQL_PORT: 13306
@@ -38,7 +49,7 @@ services:
     expose:
       - "8000"
     command: "/app/isucari"
-    working_dir: "/src/webapp/go"
+    working_dir: "/src/webapp/rust"
     volumes:
       - "$PWD:/src"
     network_mode: "host"
